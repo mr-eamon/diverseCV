@@ -8,6 +8,7 @@ class Upload extends Component {
       name: '',
       email: '',
       file: null,
+      isSubmitted: false,
     };
 
     this.handleSubmission = this.handleSubmission.bind(this);
@@ -19,9 +20,18 @@ class Upload extends Component {
 
   handleSubmission(ev) {
     ev.preventDefault();
-    console.log(this.state);
+
     const { name, email, file } = this.state;
-    uploadFile(name, email, file);
+    uploadFile(name, email, file)
+      .then((response) => {
+        this.setState({
+          isSubmitted: true,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    this.setState({ isSubmitted: true });
   }
 
   handleNameInput(ev) {
@@ -43,6 +53,17 @@ class Upload extends Component {
   }
 
   render() {
+    if (this.state.isSubmitted === true) {
+      return (
+        <div class="uploadComplete">
+        <br/>
+          <img src="https://freepngimg.com/download/green_tick/27894-7-green-tick-transparent-background.png" width="70" height="60"></img>
+          <h3>CV Subbmitted Sucessfully</h3>
+
+        </div>
+      );
+    }
+
     return (
       <div class="container">
         <form enctype="multipart/form-data" method="post">
@@ -62,11 +83,11 @@ class Upload extends Component {
               <input type="email" id="emali" name="email" placeholder="hackerman@hackerz.com" onChange={this.handleEmailInput} />
             </div>
           </div>
-          <br/>
+          <br />
           <div class="row">
             <input id="fileupload" name="myfile" type="file" onChange={this.handleFileInput} />
           </div>
-          <br/>
+          <br />
           <div class="row">
             <input type="submit" value="Submit" onClick={this.handleSubmission} />
           </div>
