@@ -1,32 +1,18 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import React, { Component, Fragment } from 'react';
 import { render } from 'react-dom';
 import { Route, NavLink, HashRouter } from "react-router-dom";
-import Hello from './Hello';
 import Upload from "./upload";
 import Review from "./review";
 import 'react-web-tabs/dist/react-web-tabs.css';
 import './style.css';
 
-class App extends Component {
-  constructor() {
-    super();
-  }
+const App = () => (
+  <Fragment>
+    <NavBar />
+  </Fragment>
+);
 
-  renderNavBar() {
-    return <NavBar />;
-  }
-
-  render() {
-    return (
-      <div>
-        {this.renderNavBar()}
-      </div>
-    );
-  }
-}
-
-class NavBar extends React.Component {
+class NavBar extends Component {
   render() {
     return (
       <HashRouter>
