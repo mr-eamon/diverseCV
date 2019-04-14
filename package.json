@@ -22,7 +22,7 @@
   "devDependencies": {
     "react-scripts": "latest"
   },
-  "proxy": "http://localhost:9000",
+  "proxy": "https://fc5f6a4d.ngrok.io",
   "browserslist": [
     ">0.2%",
     "not dead",
